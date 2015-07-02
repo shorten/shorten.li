@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+<title>shorten</title>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64747130-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<script type="text/javascript" src="https://cdn.rawgit.com/ivanakimov/hashids.js/master/lib/hashids.min.js"></script>
+</head>
+
+<style type="text/css">
+
+  body {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  header {
+    height: 200px;
+    line-height: 200px;
+  }
+
+  section.form {
+    margin: 50px ;
+  }
+  section.form form input[name="url"] {
+    height: 20px;
+    padding: 10px;
+    font-size: 14px;
+    width: 50%;
+  }
+
+  section.form form input[type=submit] {
+    text-transform: uppercase;
+    height: 43px;
+    padding:5px 25px;
+    border:0 none;
+    cursor:pointer;
+    opacity: 0.7;
+  }
+
+  section.form form input[type=submit]:hover {
+    opacity: 1;
+  }
+
+  section.list {
+    margin-top: 20px;
+  }
+
+  section.list h3 {
+    margin: 0;
+    padding: 0;
+  }
+
+  section.list ul {
+    margin: 10px 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  section.list ul li {
+    margin: 5px 0;
+  }
+
+  section.social {
+    margin: 50px 0;
+  }
+
+  footer {
+    margin-top: 20px;
+  }
+
+</style>
+<body>
+
+  <header>
+    <h1>shorten - a free url shortener</h1>
+  </header>
+  <main>
+    <section class="form">
+      <form method="POST" enctype="multipart/form-data">
+        <label for="url"></label>
+        <input type="text" name="url" placeholder="https://twitter.com/reimertz">
+        <input type="hidden" name="code" value="">
+        <input type="submit" value="Loading..." disabled>
+      </form>
+    </section>
+
+    <section class="list">
+      <span><b>Previously created</b></span>
+      <ul id="list"></ul>
+      <div>
+
+      </div>
+
+    </section>
+
+    <section class="social">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="reimertz">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </section>
+  </main>
+  <footer>
+    made by <a href="http://twitter.com/reimertz">@reimertz</a>
+  </footer>
+
+</body>
+</html>
+<script type="text/javascript">
+
+  var form = document.getElementsByTagName('form')[0],
+      urlInput = document.getElementsByTagName('input')[0],
+      codeInput = document.getElementsByTagName('input')[1],
+      submitButton = document.getElementsByTagName('input')[2],
+
+      hashids = new Hashids("gistploy-url-shortener", 8, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"),
+      timeRequest = new XMLHttpRequest(),
+      hasValues = 0,
+      hashString = 0,
+      submitted = false,
+
+      //localstorage
+      urls = [],
+      list = document.getElementById('list');
+
+
+  form.onsubmit = function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    if(submitted){
+      location.reload();
+      return;
+    }
+
+    submitted = true;
+    submitButton.setAttribute('disabled', 'true');
+    submitButton.value = 'Generating url..';
+
+    var hax = window.open('p.html?u='+ urlInput.value + '&c=' + hashString);
+
+    setTimeout(function(){
+      var fullUrl = urlInput.value;
+      //hax.close();
+
+      submitButton.removeAttribute('disabled');
+      submitButton.value = 'Done! Create another one?';
+
+      urlInput.value = 'http://git.io/' + hashString;
+
+      addToLocalStorage(fullUrl, urlInput.value);
+    },250);
+
+  };
+
+  function generateHash(){
+    hashString = hashids.encode(parseInt(hashString));
+    codeInput.value = hashString;
+    submitButton.removeAttribute('disabled');
+    submitButton.value = 'Shorten';
+  }
+
+  function getIP(json) {
+    hashString += timeRequest.responseText;json.ip;
+
+    hasValues++;
+    if(hasValues == 2) generateHash();
+  }
+
+  function getTime(){
+    timeRequest.open('GET', 'http://currentmillis.com/api/millis-since-unix-epoch.php', true);
+
+    timeRequest.onload = function() {
+      if (timeRequest.status >= 200 && timeRequest.status < 400) {
+
+        hashString += timeRequest.responseText;
+        hasValues++;
+        if(hasValues == 2) generateHash();
+      }
+      else {
+
+      }
+    };
+
+    timeRequest.onerror = function() {
+
+    };
+
+    timeRequest.send();
+  }
+
+  function addToLocalStorage(fullUrl, shortUrl){
+    var urlObject = {'full':fullUrl, 'short':shortUrl};
+    urls.push(urlObject);
+
+    localStorage.setItem('urls', JSON.stringify(urls));
+
+    addUrlToList(urlObject);
+  }
+
+  function addUrlToList(urlObject){
+    var li = document.createElement("LI");
+        span = a = document.createElement('span');
+        a = document.createElement('a');
+
+    span.innerHTML = ' (' + urlObject.full + ')';
+
+    a.href = urlObject.short;
+    a.innerHTML = urlObject.short;
+
+    li.appendChild(a);
+    li.appendChild(span);
+    list.appendChild(li);
+  }
+
+  function loadFromLocalStorage(){
+    urls = JSON.parse(localStorage.getItem('urls')) || [];
+
+    if(!urls || urls.length === 0) return;
+
+    urls.map(function(url){
+      addUrlToList(url);
+    })
+  }
+
+  getTime();
+  loadFromLocalStorage();
+</script>
+
+<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
