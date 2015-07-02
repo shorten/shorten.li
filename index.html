@@ -149,7 +149,6 @@
 
     setTimeout(function(){
       var fullUrl = urlInput.value;
-      //hax.close();
 
       submitButton.removeAttribute('disabled');
       submitButton.value = 'Done! Create another one?';
@@ -157,6 +156,8 @@
       urlInput.value = 'http://git.io/' + hashString;
 
       addToLocalStorage(fullUrl, urlInput.value);
+
+      hax.close();
     },250);
 
   };
