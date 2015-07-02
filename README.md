@@ -1,5 +1,9 @@
 # shorten.github.io
 
+Shorten is a url-shortener that use the power of git.io
+with the huge advantage of allowing any domain (git.io only allow github.com).
+
+
 ##How it works
 
 1. get ms since epoch from random api
