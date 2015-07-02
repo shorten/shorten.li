@@ -88,7 +88,7 @@
     <section class="form">
       <form method="POST" enctype="multipart/form-data">
         <label for="url"></label>
-        <input type="text" name="url" placeholder="https://twitter.com/reimertz">
+        <input name="url" placeholder="https://twitter.com/reimertz"  type="url" pattern="https?://.+" required>
         <input type="hidden" name="code" value="">
         <input type="submit" value="Loading..." disabled>
       </form>
