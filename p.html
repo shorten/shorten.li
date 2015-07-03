@@ -21,9 +21,11 @@ function getParameterByName(name) {
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 
 }
+var u = getParameterByName('u'),
+    c = getParameterByName('c');
 
-document.getElementsByTagName('input')[0].value = 'https://shorten.github.io/r.html?u=' + getParameterByName('u');
-document.getElementsByTagName('input')[1].value = getParameterByName('c');
+document.getElementsByTagName('input')[0].value = 'https://shorten.github.io/r.html?u=' + u + '&_sid=' + c;
+document.getElementsByTagName('input')[1].value = c;
 document.getElementsByTagName('form')[0].submit();
 </script>
 </html>
