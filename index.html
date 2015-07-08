@@ -13,141 +13,15 @@
   ga('create', 'UA-64747130-1', 'auto');
   ga('send', 'pageview');
 </script>
-<script type="text/javascript" src="https://cdn.rawgit.com/ivanakimov/hashids.js/master/lib/hashids.min.js"></script>
-</head>
 <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
-<style type="text/css">
+<link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
 
-  body {
-    background: firebrick;
-    color: white;
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  header {
-    font-family: 'Playfair Display', serif;
-    height: 200px;
-    padding:50px;
-    background-color: firebrick;
-    color: white;
-  }
-
-  a {
-    opacity: 1;
-    transition: 200ms;
-  }
-  a:hover {
-    opacity: 0.8;
-  }
-
-  h1 {
-    letter-spacing: 1px;
-  }
-
-  h3, h4 {
-    letter-spacing: 2px;
-    opacity: 0.9;
-  }
-
-  section.form {
-    margin: 50px ;
-  }
-
-  section.form form input[name="url"] {
-    height: 20px;
-    padding: 10px;
-    font-size: 14px;
-    color: firebrick;
-    width: 50%;
-  }
-
-  section.form form input[name="url"]::-webkit-input-placeholder {
-    color: firebrick;
-    opacity:0.4;
-  }
-
-  section.form form input[name="url"]:-moz-placeholder { /* Firefox 18- */
-    color: firebrick;
-    opacity:0.4;
-  }
-
-  section.form form input[name="url"]::-moz-placeholder {  /* Firefox 19+ */
-    color: firebrick;
-    opacity:0.4;
-  }
-
-  section.form form input[name="url"]:-ms-input-placeholder {
-    color: firebrick;
-    opacity:0.4;
-  }
-
-  section.form form input[type=submit] {
-    text-transform: uppercase;
-    background-color: white;
-    color: firebrick;
-    height: 43px;
-    padding:5px 25px;
-    border:0 none;
-    cursor: pointer;
-    opacity: 1;
-    transition: 200ms;
-  }
-
-  section.form form input[type=submit]:hover {
-    opacity: 0.9;
-  }
-
-  section.list {
-    margin-top: 20px;
-    background-color: white;
-    color: firebrick;
-    padding: 50px;
-  }
-
-  section.list h3 {
-    margin: 0;
-    padding: 0;
-  }
-
-  section.list ul {
-    margin: 30px 0 10px;
-    padding: 0;
-    list-style-type: none;
-  }
-
-  section.list ul li {
-    margin: 5px 0;
-  }
-
-  section.list ul li a {
-    color: firebrick;
-    font-style: italic;
-  }
-
-
-  section.social {
-    margin: 50px 0;
-  }
-
-  footer {
-    height: 100px;
-    line-height: 100px;
-  }
-
-  footer a {
-    color: white;
-  }
-  footer span {
-    margin: 0 10px;
-  }
-
-</style>
 <body>
 
   <header>
     <h1>shorten - a free url shortener</h1>
-    <h4>extending git.io, making it a tiny bit better.</h4>
+    <h4>extending git.io, making it a tiny bit better by allowing any domains.</h4>
     <a href="https://twitter.com/share" class="twitter-share-button" data-via="reimertz">Tweet</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </header>
@@ -157,16 +31,13 @@
         <label for="url"></label>
         <input name="url" placeholder="https://twitter.com/reimertz"  type="url" pattern="https?://.+" required>
         <input type="hidden" name="code" value="">
-        <input type="submit" value="Loading..." disabled>
+        <input type="submit" value="Shorten">
       </form>
     </section>
 
     <section class="list">
-      <h3>Your previously shortened urls</h3>
+      <h3>Your previously shortened urls <span class="clear">(clear)</span></h3>
       <ul id="list"></ul>
-      <div>
-
-      </div>
     </section>
   </main>
   <footer>
@@ -180,128 +51,6 @@
 
 </body>
 </html>
-<script type="text/javascript">
 
-  var form = document.getElementsByTagName('form')[0],
-      urlInput = document.getElementsByTagName('input')[0],
-      codeInput = document.getElementsByTagName('input')[1],
-      submitButton = document.getElementsByTagName('input')[2],
-
-      hashids = new Hashids("gistploy-url-shortener", 8, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"),
-      timeRequest = new XMLHttpRequest(),
-      hasValues = 0,
-      hashString = 0,
-      submitted = false,
-
-      //localstorage
-      urls = [],
-      list = document.getElementById('list');
-
-
-  form.onsubmit = function(e){
-    e.preventDefault();
-    e.stopPropagation();
-
-    if(submitted){
-      location.reload();
-      return;
-    }
-
-    submitted = true;
-    submitButton.setAttribute('disabled', 'true');
-    submitButton.value = 'Generating url..';
-
-    var hax = window.open('p.html?u='+ urlInput.value + '&c=' + hashString);
-
-    setTimeout(function(){
-      var fullUrl = urlInput.value;
-
-      submitButton.removeAttribute('disabled');
-      submitButton.value = 'Done! Create another one?';
-
-      urlInput.value = 'http://git.io/' + hashString;
-      urlInput.select();
-
-      addToLocalStorage(fullUrl, urlInput.value);
-
-      hax.close();
-    },500);
-
-  };
-
-  function generateHash(){
-    hashString = hashids.encode(parseInt(hashString));
-    codeInput.value = hashString;
-    submitButton.removeAttribute('disabled');
-    submitButton.value = 'Shorten';
-  }
-
-  function getIP(json) {
-    hashString += timeRequest.responseText;json.ip;
-
-    hasValues++;
-    if(hasValues == 2) generateHash();
-  }
-
-  function getTime(){
-    timeRequest.open('GET', 'http://currentmillis.com/api/millis-since-unix-epoch.php', true);
-
-    timeRequest.onload = function() {
-      if (timeRequest.status >= 200 && timeRequest.status < 400) {
-
-        hashString += timeRequest.responseText;
-        hasValues++;
-        if(hasValues == 2) generateHash();
-      }
-      else {
-
-      }
-    };
-
-    timeRequest.onerror = function() {
-
-    };
-
-    timeRequest.send();
-  }
-
-  function addToLocalStorage(fullUrl, shortUrl){
-    var urlObject = {'full':fullUrl, 'short':shortUrl};
-    urls.push(urlObject);
-
-    localStorage.setItem('urls', JSON.stringify(urls));
-
-    addUrlToList(urlObject);
-  }
-
-  function addUrlToList(urlObject){
-    var li = document.createElement("LI");
-        span = a = document.createElement('span');
-        a = document.createElement('a');
-
-    span.innerHTML =  '  ('  + urlObject.full + ')';
-
-    a.href = urlObject.short;
-    a.innerHTML = urlObject.short.replace('http://git.io/', '');
-
-    li.appendChild(a);
-    li.appendChild(span);
-
-    list.appendChild(li);
-  }
-
-  function loadFromLocalStorage(){
-    urls = JSON.parse(localStorage.getItem('urls')) || [];
-
-    if(!urls || urls.length === 0) return;
-
-    urls.map(function(url){
-      addUrlToList(url);
-    })
-  }
-
-  getTime();
-  loadFromLocalStorage();
-</script>
-
-<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/shorten/js/master/dist/0.0.1/shorten.js"></script>
+<script type="text/javascript" src="assets/app.js"></script>
