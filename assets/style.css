@@ -16,6 +16,7 @@ header {
 
 a,
 .clear {
+  color: white;
   opacity: 1;
   transition: 200ms;
 }
