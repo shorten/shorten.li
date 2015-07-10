@@ -16,17 +16,33 @@ block content
       h2
         span="A free client-side url-shortener, say whaat?"
 
+    section.code
+      pre="reimertz at MacBook-Pro in ~/git/shorten/\n$"
+      script.
+        var array = [ "bower install shorten --save\n",
+          "$touch hax.js\n",
+          "$subl hax.js \n\n",
+          "1 var long = 'http://reimertz.co'; \\\\not so long :D \n",
+          "2 shorten.url(long,\n",
+          "3    function(err, short){\n",
+          "4      if(err) alert('most be a valid url.')\n",
+          "5 \n",
+          "6        prompt(long + ' got shortened to', short);\n",
+          "7    });"]
+        .join('')
+        .split('');
 
-    section.form
-      form#form
-        input(type="bower" value="" autofocus)
-        script.
-          "bower install shorten --save".split('').map(function(char, i){
-            setTimeout(function(){document.querySelector('[type="bower"]').value+=char}, i*100);
-          });
+        var interval = setInterval(function(){
+          if(!array[0]){
+            var long = 'http://reimertz.co';
 
-        input(type="submit" value="Download")
+            shorten.url(long, function(err, short){
+              if(err) alert('most be a valid url.')
 
-    //- section.code
-    //-   a(class="jsbin-embed" href="http://jsbin.com/zimovufuze/embed?html")="JS Bin on jsbin.com"
-    //-     script(src="http://static.jsbin.com/js/embed.min.js?3.31.0")
+              prompt(long + ' got shortened to', short);
+            });
+            return clearInterval(interval);
+          }
+
+          document.querySelector('pre').innerHTML+= array.shift();
+        }, 100);
