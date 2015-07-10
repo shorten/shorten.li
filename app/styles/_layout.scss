@@ -1,13 +1,13 @@
 
 html {
   overflow-x: hidden;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   position: relative;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px 40px 40px;
 
   opacity: 0;
   transition: opacity 500ms;

@@ -9,8 +9,7 @@ main > section.form {
     overflow: hidden;
     transition: height 500ms;
 
-    input[type="url"],
-    input[type="bower"] {
+    input[type="url"] {
       background: transparent;
       border: 3px solid rgba(255,255,255,0.4);
       border-right: none;
@@ -45,6 +44,15 @@ main > section.form {
 
     input:focus {
       border-color: rgba(255,255,255,1);
+    }
+  }
+
+  @include max-screen(500px) {
+    form {
+      input[type="url"],
+      input[type="submit"] {
+        font-size: 1.2rem;
+      }
     }
   }
 }

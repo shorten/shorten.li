@@ -8,5 +8,9 @@ header {
       display: inline;
       padding: 0 2rem;
     }
+
+    @include max-screen(500px) {
+      font-size: 1rem;
+    }
   }
 }

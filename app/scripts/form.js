@@ -24,7 +24,7 @@ form.onsubmit = function(e) {
     var fullUrl = urlInput.value;
 
     submitButton.removeAttribute('disabled');
-    submitButton.value = 'Done! Create another one?';
+    submitButton.value = 'create more?';
 
     urlInput.value = shortenUrl;
     urlInput.select();

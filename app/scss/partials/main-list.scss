@@ -43,6 +43,26 @@ main > section.list {
        font-size: 1.5rem;
       }
     }
+  }
+
+  @include max-screen(500px) {
+    margin-top: 4rem;
+
+    header {
+      h3  {
+        font-size: 1.7rem;
+      }
+    }
+    ul {
+      li {
+        a {
+          font-size: 1.7rem;
+        }
+        span {
+         font-size: 1.2rem;
+        }
+      }
+    }
 
   }
 }
