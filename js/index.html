@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>shorten.li</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
+    <link rel="stylesheet" href="styles/vendor.css">
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="//github.com/shorten/js#shortenjs">documentation</a></li>
+          <li><a href="/">shorten.li</a></li>
+          <li><a href="https://twitter.com/shortenli" target="_blank">twitter</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <header>
+        <h1>shorten.js</h1>
+        <h2><span>A free client-side url-shortener, say whaat?</span></h2>
+      </header>
+      <section class="form">
+        <form id="form">
+          <input type="bower" value="" autofocus>
+          <script>
+            "bower install shorten --save".split('').map(function(char, i){
+              setTimeout(function(){document.querySelector('[type="bower"]').value+=char}, i*100);
+            });
+            
+          </script>
+          <input type="submit" value="Download">
+        </form>
+      </section>
+    </main>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-49141358-1');ga('send','pageview');
+      
+    </script>
+    <script src="/scripts/vendor.js"></script>
+    
+    <script src="/scripts/main.js"></script>
+  </body>
+</html>
