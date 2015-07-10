@@ -1,0 +1,42 @@
+
+html {
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  opacity: 0;
+  transition: opacity 500ms;
+
+  &.loaded {
+    opacity: 1;
+  }
+
+  @include min-screen(500px) {
+   max-width: 600px;
+  }
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+
+  > header {
+  flex: 1;
+  margin-top: 1rem;
+
+    @include max-screen(500px) {
+        margin-top: 0;
+    }
+  }
+}

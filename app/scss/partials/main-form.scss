@@ -1,0 +1,50 @@
+main > section.form {
+
+  margin-top: 8rem;
+
+  form {
+    display: flex;
+    flex-direction: row;
+    font-family: $font-sans;
+    overflow: hidden;
+    transition: height 500ms;
+
+    input[type="url"],
+    input[type="bower"] {
+      background: transparent;
+      border: 3px solid rgba(255,255,255,0.4);
+      border-right: none;
+      flex: 8;
+      font-size: 1.5rem;
+      height: 30px;
+      outline: 0;
+      padding: 0.5rem 1rem;
+      transition: 200ms;
+
+      &::-webkit-input-placeholder {
+        color: white;
+      }
+    }
+
+    input[type="submit"] {
+      background: white;
+      border: none;
+      color: $sh-yellow;
+      flex: 2;
+      font-size: 1.5rem;
+      height: auto;
+      outline: 0;
+      padding: 0.5rem 1rem;
+      transition: 200ms;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+    }
+
+    input:focus {
+      border-color: rgba(255,255,255,1);
+    }
+  }
+}

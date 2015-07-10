@@ -1,20 +1,18 @@
-# shorten.github.io
+# hc-org
 
-Shorten is a url-shortener that use the power of git.io
-with the huge advantage of allowing any domain (git.io only allow github.com).
 
-###File Responsibilities
+## Install
+```bash
+npm install
+bower install
+```
 
-####index.html (shorten.github.io)
-Duh, this is the landing page. But less obviously is it that
-the hash is created here onload using ms since epoch and users ip.
+## Serve
+```bash
+gulp serve
+```
 
-####m.html (shorten.github.io/m.html?u=url)
-This page is used when a url is malformed.
-
-####p.html (shorten.github.io/p.html?u=url&code=c)
-This page is responsible for creating our shorened url
-
-####r.html (shorten.github.io/r.html?u=url)
-This page does there directing.
-
+## deploy
+```bash
+gulp deploy
+```

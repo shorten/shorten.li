@@ -1,0 +1,48 @@
+main > section.list {
+
+  margin-top: 7rem;
+
+  header {
+    h3 {
+      font-size: 1.7rem;
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid white;
+  }
+
+  ul {
+
+    padding-left: 20px;
+    text-align: left;
+
+    li {
+      position: relative;
+      margin-top: 20px;
+
+      a, span {
+      display: block;
+    }
+
+      a {
+        font-size: 2rem;
+      &:before {
+        content: '';
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: white;
+        left: -23px;
+        top: 18px;
+      }
+
+      }
+      span {
+       font-size: 1.5rem;
+      }
+    }
+
+  }
+}

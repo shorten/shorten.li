@@ -1,0 +1,31 @@
+extends ../layouts/default
+
+block content
+  header
+    nav
+      ul
+        li
+          a(href="http://github.com/shorten/shorten.github.io") source
+        li
+          a(href="/js") shorten.js
+        li
+          a(href="https://twitter.com/shortenli" target="_blank") twitter
+  main
+    header
+      h1 shorten.li
+      h2
+        span="Free link-shortener?"
+        span="Yes."
+        span="Open-source?"
+        span="Double-yes!"
+
+    section.form
+      form#form
+        input(name="url" type="url" pattern="https?://.+" placeholder="paste a link to shorten it" required autofocus)
+        input(type="submit" value="shorten")
+
+    section.list
+      header
+        h3="Your previously shortened links"
+      hr
+      ul#list

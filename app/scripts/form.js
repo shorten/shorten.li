@@ -1,14 +1,11 @@
-var form = document.getElementsByTagName('form')[0],
-    urlInput = document.getElementsByTagName('input')[0],
-    codeInput = document.getElementsByTagName('input')[1],
-    clearButton = document.getElementsByClassName('clear')[0],
-    submitButton = document.getElementsByTagName('input')[2],
+(function(){
+"use strict";
 
-    hashids = new Hashids("gistploy-url-shortener", 0, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"),
-    timeRequest = new XMLHttpRequest(),
-    hasValues, uniqueId, hashId, submitted;
-
-    //localstorage
+var form = document.getElementById("form"),
+    urlInput = form.children[0],
+    //clearButton = document.getElementsByClassName('clear')[0],
+    submitButton = form.children[1],
+    submitted,
     urls = [],
     list = document.getElementById('list');
 
@@ -22,7 +19,7 @@ form.onsubmit = function(e) {
   submitted = true;
   submitButton.setAttribute('disabled', 'true');
   submitButton.value = 'Generating url..';
-
+  console.log(urlInput.value);
   shorten.url(urlInput.value, function(err, shortenUrl) {
     var fullUrl = urlInput.value;
 
@@ -49,14 +46,14 @@ function addToLocalStorage(fullUrl, shortUrl) {
 }
 
 function addUrlToList(urlObject) {
-  var li = document.createElement("LI");
-      span = a = document.createElement('span');
+  var li = document.createElement("LI"),
+      span = document.createElement('span'),
       a = document.createElement('a');
 
-  span.innerHTML =  '  ('  + urlObject.full + ')';
+  span.innerHTML =  urlObject.full;
 
   a.href = urlObject.short;
-  a.innerHTML = urlObject.short.replace('http://git.io/', '');
+  a.innerHTML = urlObject.short.replace('git.io', 's10.li');
 
   li.appendChild(a);
   li.appendChild(span);
@@ -81,7 +78,7 @@ function clearLocalStorage() {
   localStorage.clear();
 }
 
-clearButton.addEventListener('click', clearLocalStorage);
+// clearButton.addEventListener('click', clearLocalStorage);
 
 function reset() {
   submitButton.value = 'Shorten';
@@ -96,3 +93,5 @@ function init() {
 }
 
 init();
+
+})();

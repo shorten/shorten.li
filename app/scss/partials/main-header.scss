@@ -1,0 +1,22 @@
+main {
+  margin-top: 3rem;
+  header {
+    h1 {
+      margin: 0;
+      letter-spacing: 8px;
+    }
+    h2 {
+      margin: -1.5rem 0 0 0;
+
+      span:first-child{
+        padding-left: 0;
+      }
+      span {
+        padding: 0 2rem;
+      }
+      span:last-child{
+        padding-right: 0;
+      }
+    }
+  }
+}

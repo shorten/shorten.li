@@ -1,0 +1,62 @@
+html {
+  font-size: ($html-font-size - 4) !important;
+
+  @include max-screen(500px) {
+    font-size: ($html-font-size - 5) !important;
+  }
+}
+
+body {
+  font-size: $body-font-size;
+  font-family: $font-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-align: center;
+}
+
+h1 {
+  font-weight: 900;
+  font-size: 12rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+a, a:visited {
+  text-decoration: none;
+  cursor: pointer;
+  color: $color-link;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+a:hover, a.active {
+  color: $color-link-hover;
+  opacity: 0.7;
+}
+
+a:visited {
+  color: $color-link;
+}
+
+p {
+  font-family: $font-serif;
+  padding: 1rem;
+}
+
+
+// main > header > *:nth-child(2),
+// main > header > *:nth-child(3),
+// main > header > *:nth-child(4) {
+//   opacity: 0 !important;
+//   animation:  fade-in-animation 500ms ease-in-out both;
+//   animation-delay: 0;
+// }
