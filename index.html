@@ -1,56 +1,55 @@
 <!DOCTYPE html>
-<html>
-<head>
-<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
-<title>shorten</title>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-64747130-1', 'auto');
-  ga('send', 'pageview');
-</script>
-<link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="assets/style.css">
-</head>
-
-<body>
-
-  <header>
-    <h1>shorten - a free url shortener</h1>
-    <h4>extending git.io, making it a tiny bit better by allowing any domains.</h4>
-    <a href="https://twitter.com/share" class="twitter-share-button" data-via="reimertz">Tweet</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-  </header>
-  <main>
-    <section class="form">
-      <form method="POST" enctype="multipart/form-data">
-        <label for="url"></label>
-        <input name="url" placeholder="https://twitter.com/reimertz"  type="url" pattern="https?://.+" required>
-        <input type="hidden" name="code" value="">
-        <input type="submit" value="Shorten">
-      </form>
-    </section>
-
-    <section class="list">
-      <h3>Your previously shortened urls <span class="clear">(clear)</span></h3>
-      <ul id="list"></ul>
-    </section>
-  </main>
-  <footer>
-    <span>
-      created by <a href="http://twitter.com/reimertz">@reimertz</a>
-    </span>
-    <span>
-      source at <a href="http://github.com/shorten">github.com/shorten</a>
-    </span>
-  </footer>
-
-</body>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>shorten.li</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory-->
+    <link rel="stylesheet" href="styles/vendor.css">
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="http://github.com/shorten/shorten.github.io">source</a></li>
+          <li><a href="/js">shorten.js</a></li>
+          <li><a href="https://twitter.com/shortenli" target="_blank">twitter</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <header>
+        <h1>shorten.li</h1>
+        <h2><span>Free link-shortener?</span><span>Yes.</span><span>Open-source?</span><span>Double-yes!</span></h2>
+      </header>
+      <section class="form">
+        <form id="form">
+          <input name="url" type="url" pattern="https?://.+" placeholder="paste a link to shorten it" required autofocus>
+          <input type="submit" value="shorten">
+        </form>
+      </section>
+      <section class="list">
+        <header>
+          <h3>Your previously shortened links</h3>
+        </header>
+        <hr>
+        <ul id="list"></ul>
+      </section>
+    </main>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-49141358-1');ga('send','pageview');
+      
+    </script>
+    <script src="/scripts/vendor.js"></script>
+    
+    <script src="/scripts/main.js"></script>
+  </body>
 </html>
-
-<script type="text/javascript" src="https://cdn.rawgit.com/shorten/js/master/dist/0.0.2/shorten.js"></script>
-<script type="text/javascript" src="assets/app.js"></script>
