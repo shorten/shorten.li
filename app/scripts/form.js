@@ -53,7 +53,7 @@ function addUrlToList(urlObject) {
   span.innerHTML =  urlObject.full;
 
   a.href = urlObject.short;
-  a.innerHTML = urlObject.short.replace('git.io', 's10.li');
+  a.innerHTML = urlObject.short;
 
   li.appendChild(a);
   li.appendChild(span);
