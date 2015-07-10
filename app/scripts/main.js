@@ -5,4 +5,4 @@ document.body.classList.add('loaded');
 
 window.onbeforeunload = function(e) {
   document.body.style.opacity = 0;
-}
+};
