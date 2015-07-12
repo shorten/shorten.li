@@ -24,10 +24,14 @@ form.onsubmit = function(e) {
     var fullUrl = urlInput.value;
 
     if(err){
-      ga('send', 'event', 'shorten', 'create', 'error', fullUrl);
+      ga('send', 'exception', {
+        'exDescription': 'malformedUrl',
+        'exFatal': false
+      });
+
     }
 
-    ga('send', 'event', 'shorten', 'create', 'success', fullUrl);
+    ga('send', 'event', 'shorten.url', 'success', fullUrl);
 
     submitButton.removeAttribute('disabled');
     submitButton.value = 'create more?';
