@@ -23,6 +23,12 @@ form.onsubmit = function(e) {
   shorten.url(urlInput.value, function(err, shortenUrl) {
     var fullUrl = urlInput.value;
 
+    if(err){
+      ga('send', 'event', 'shorten', 'create', 'error', fullUrl);
+    }
+
+    ga('send', 'event', 'shorten', 'create', 'success', fullUrl);
+
     submitButton.removeAttribute('disabled');
     submitButton.value = 'create more?';
 
