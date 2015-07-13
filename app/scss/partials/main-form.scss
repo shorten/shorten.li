@@ -47,6 +47,10 @@ main > section.form {
     }
   }
 
+  p {
+    font-size: 2.5em;
+   }
+
   @include max-screen(500px) {
     form {
       input[type="url"],

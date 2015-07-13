@@ -2,7 +2,12 @@ html {
   font-size: ($html-font-size - 4) !important;
 
   @include max-screen(500px) {
-    font-size: ($html-font-size - 5) !important;
+    h1 {
+      font-size: 5rem;
+    }
+    h2 {
+      font-size: 1.6rem;
+    }
   }
 }
 
