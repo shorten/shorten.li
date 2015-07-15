@@ -5,7 +5,7 @@
     "sass-mediaqueries": "~1.5.1",
     "normalize.css": "~3.0.3",
     "playfair-webfont": "~1.0.2",
-    "shorten": "~0.2.0"
+    "shorten": "~0.2.1"
   },
   "overrides": {
     "sass-mediaqueries": {
