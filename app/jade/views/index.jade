@@ -23,7 +23,6 @@ block content
       form#form
         input(name="url" type="url" pattern="https?://.+" placeholder="paste a link to shorten it" required autofocus)
         input(type="submit" value="shorten")
-      p#urls-created
 
     section.list
       header
@@ -32,7 +31,4 @@ block content
       ul#list
   // build:js /scripts/form.js
   script(src='/scripts/form.js')
-  // endbuild
-  // build:js /scripts/urlsCreated.js
-  script(src='/scripts/urlsCreated.js')
   // endbuild
